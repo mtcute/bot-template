@@ -1,4 +1,4 @@
-FROM node:latest
+FROM node:current-alpine
 
 RUN curl -sL https://unpkg.com/@pnpm/self-installer | node
 
