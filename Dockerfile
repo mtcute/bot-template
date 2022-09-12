@@ -1,14 +1,11 @@
-FROM node:current-alpine
+FROM node:18-alpine
 
-RUN curl -sL https://unpkg.com/@pnpm/self-installer | node
+RUN corepack enable && corepack prepare pnpm@7.11.0 --activate
 
 WORKDIR /app
 
-COPY package*.json ./
-COPY pnpm*.yaml ./
-COPY tsconfig.json ./
-COPY .npmrc ./
-RUN pnpm install
+COPY package*.json pnpm*.yaml tsconfig.json .npmrc ./
+RUN pnpm install --frozen-lockfile
 
 COPY src /app/src
 RUN pnpm run build
