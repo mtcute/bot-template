@@ -1,5 +1,6 @@
 import 'dotenv/config'
 import { Dispatcher, filters, NodeTelegramClient } from '@mtcute/node'
+import { tr } from './i18n'
 
 const client = new NodeTelegramClient({
     apiId: parseInt(process.env.API_ID!),
@@ -10,7 +11,7 @@ const client = new NodeTelegramClient({
 const dp = new Dispatcher(client)
 
 dp.onNewMessage(filters.start, async (msg) => {
-    await msg.answerText('Hello, world!')
+    await msg.answerText(tr(msg, 'helloWorld'))
 })
 
 client.run(
